@@ -13,7 +13,7 @@ body {
 
 a {
     text-decoration: none;
-    columns: #cdc6be;
+    color: #cdc6be;
 }
 
 .website-content {
@@ -76,13 +76,15 @@ nav > div {
     justify-content: center;
     align-items: center;
     padding: 1.75em 2em 1.5em 2em;
-    background: rgba(255, 255, 255, 0);
+    background: rgba(0, 0, 0, 0);
     outline: none;
     border: none;
     width: 28px;
     height: 20px;
     transition: all 250ms ease-out;
     cursor: pointer;
+    position: relative; /* Ajuste para posicionamento dos traços */
+    mix-blend-mode: difference;
 }
 
 .burguer:before,
@@ -91,7 +93,7 @@ nav > div {
     width: 40px;
     height: 2px;
     position: absolute;
-    background: #cdc6be;
+    background: #cdc6be; /* Cor inicial dos traços */
     transition: all 250ms ease-out;
     will-change: transform;
 }
@@ -104,11 +106,11 @@ nav > div {
     transform: translateY(3px);
 }
 
-.active.burguer:before {
+.burguer.active:before {
     transform: translateY(0) rotate(45deg);
 }
 
-.active.burguer:after {
+.burguer.active:after {
     transform: translateY(0) rotate(-45deg);
 }
 
@@ -118,10 +120,15 @@ nav > div {
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: none; /* Ajuste para garantir que o overlay comece escondido */
     background: #141412;
     /* clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); */
     will-change: transform;
+    z-index: 1; /* Ajuste para garantir que o overlay fique acima do conteúdo */
+}
+
+.overlay.open {
+    display: flex; /* Mostrar o overlay quando o menu estiver aberto */
 }
 
 .overlay-menu {
@@ -151,6 +158,7 @@ nav > div {
     line-height: 80%;
     will-change: transform;
     transition: letter-spacing 0.3s;
+    color: #ffffff; /* Definindo a cor do texto para branco */
 }
 
 .menu-item p:hover {
@@ -175,7 +183,11 @@ nav > div {
     transform: translateX(-50%);
     display: flex;
     gap: 0.5em;
-    /* opacity: 0; */
+    opacity: 0; /* Ajuste para garantir que comece transparente */
+}
+
+.sub-nav.show {
+    opacity: 1; /* Mostrar quando a animação estiver ativa */
 }
 
 .sub-nav p {
